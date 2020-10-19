@@ -15,13 +15,13 @@
             android:layout_height="wrap_content">
             <TextView
                 android:text="NPM       : "
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/npm"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="NPM"/>
@@ -31,14 +31,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="Password : "
-                android:textSize="17dp"
+                android:text="Password  : "
+                android:textSize="12dp"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/password"
-                android:textSize="17dp"
+                android:textSize="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="password" />
