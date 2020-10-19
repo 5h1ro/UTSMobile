@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".MainActivity">
+    tools:context=".MainRegistrasi">
 
     <ImageView
         android:background="@drawable/ic_logo"
@@ -54,7 +54,7 @@
                         android:layout_height="30dp"/>
 
                     <EditText
-                        android:id="@+id/txtNPM"
+                        android:id="@+id/rNPM"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -76,7 +76,7 @@
                         android:layout_height="30dp"/>
 
                     <EditText
-                        android:id="@+id/txtPassword"
+                        android:id="@+id/rPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -87,38 +87,21 @@
                         android:textSize="14sp" />
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/btnRegister"
-                    android:textSize="12dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_alignRight="@+id/btn_Login"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="-10dp"
-                    android:layout_marginLeft="178dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@android:color/transparent"
-                    android:gravity="center|right"
-                    android:onClick="Regis"
-                    android:text="Belum punya akun?"
-                    android:textAllCaps="false"
-                    android:textColor="#00A5FF" />
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
 
                     <Button
-                        android:id="@+id/btn_Login"
+                        android:id="@+id/btn_register"
                         android:layout_width="287dp"
                         android:layout_height="36dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginLeft="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
-                        android:onClick="Login"
-                        android:text="Login"
+                        android:onClick="Register"
+                        android:text="Register"
                         android:backgroundTint="#00459D"
                         android:textAllCaps="false"
                         android:textColor="#fff" />
