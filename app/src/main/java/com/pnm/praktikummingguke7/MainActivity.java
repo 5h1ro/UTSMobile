@@ -33,29 +33,30 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
-    EditText txtNPM,txtPassword;
+    EditText txtNPM, txtPassword;
     String url = "https://pajuts.000webhostapp.com/read.php";
-    String sNPM,sPassword,npm,nama,password,isiNPM,isiPASSWORD,textNPM,textPASSWORD,isidariNPM,isidariPASSWORD,hasil;
+    String sNPM, sPassword, npm, password, isiNPM, isiPASSWORD, textNPM, textPASSWORD, isidariNPM, isidariPASSWORD, hasil;
     private RequestQueue mQueue;
     Button btn_Login;
     ArrayList<HashMap<String, String>> hasilNPM = new ArrayList<HashMap<String, String>>();
     ArrayList<HashMap<String, String>> hasilPassword = new ArrayList<HashMap<String, String>>();
 
-    public static String md5(String message){
+    public static String md5(String message) {
         String digest = null;
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] hash = md.digest(message.getBytes("UTF-8"));
-            StringBuilder sb = new StringBuilder(2*hash.length);
-            for(byte b : hash){
-                sb.append(String.format("%02x", b&0xff));
+            StringBuilder sb = new StringBuilder(2 * hash.length);
+            for (byte b : hash) {
+                sb.append(String.format("%02x", b & 0xff));
             }
             digest = sb.toString();
-        } catch (UnsupportedEncodingException ex){
+        } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchAlgorithmException ex){
+        } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, ex);
-        } return digest;
+        }
+        return digest;
     }
 
     @Override
@@ -77,7 +78,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void jsonParse(){
+    public void Regis(View view) {
+
+        startActivity(new Intent(getApplicationContext(),MainRegistrasi.class));
+        finish();
+    }
+
+    public void jsonParse() {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -100,8 +107,17 @@ public class MainActivity extends AppCompatActivity {
                                 hasilNPM.add(dataNPM);
                                 hasilPassword.add(dataPASSWORD);
 
-                                CheckLogin();
+                                isiNPM = txtNPM.getText().toString();
+                                isiPASSWORD = md5(txtPassword.getText().toString());
+                                if (npm.equals(isiNPM) && password.equals(isiPASSWORD)) {
+                                    hasil = "Berhasil Login";
+                                    success();
+                                    break;
+                                } else {
+                                    hasil = "Email atau Password Salah";
+                                }
                             }
+                            error();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -113,35 +129,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mQueue.add(request);
-
-
     }
-    private void CheckLogin() {
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        isiNPM = txtNPM.getText().toString();
-        isiPASSWORD = md5(txtPassword.getText().toString());
 
-        textNPM = "{npm="+isiNPM+"}";
-        textPASSWORD = "{password="+isiPASSWORD+"}";
-
-        for (int i = 0; i <hasilNPM.size(); i++){
-            isidariNPM = hasilNPM.get(i).toString();
-            isidariPASSWORD = hasilPassword.get(i).toString();
-            if (textNPM.equals(isidariNPM) && textPASSWORD.equals(isidariPASSWORD)){
-                benar();
-                break;
-            } else {
-                salah();
-                break;
-            }
+    public void success() {
+        if (hasil.equals("Berhasil Login")) {
+            Intent intent = new Intent(MainActivity.this, MainAplikasi.class);
+            startActivity(intent);
+            Toast.makeText(this, "Selamat Datang", Toast.LENGTH_LONG).show();
         }
     }
-    public void benar(){
-        Intent intent = new Intent(MainActivity.this, MainAplikasi.class);
-        startActivity(intent);
-        Toast.makeText(this, "Selamat Datang", Toast.LENGTH_LONG).show();
-    }
-    public void salah(){
-        Toast.makeText(this, "NPM atau Password anda salah. \n"+isidariPASSWORD+" atau \n" + isidariNPM, Toast.LENGTH_LONG).show();
+
+    public void error() {
+        if (hasil.equals("Email atau Password Salah")) {
+            Toast.makeText(this, "NPM atau Password anda salah", Toast.LENGTH_LONG).show();
+        }
     }
 }
